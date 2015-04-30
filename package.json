@@ -1,0 +1,24 @@
+{
+  "name": "miniTemplate",
+  "version": "1.0.0",
+  "description": "迷你的模板引擎",
+  "main": "gen.js",
+  "scripts": {
+    "test": "node gen.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhrln/miniTemplate.git"
+  },
+  "keywords": [
+    "template",
+    "mini",
+    "javascript"
+  ],
+  "author": "zhrln",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhrln/miniTemplate/issues"
+  },
+  "homepage": "https://github.com/zhrln/miniTemplate"
+}
