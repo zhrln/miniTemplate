@@ -1,3 +1,4 @@
+/* global define */
 ;(function(){
     'use strict';
     /* 用于在 strict 状态下取全局对象*/
@@ -8,7 +9,7 @@
             this.inApp = true;
             this.dep = {
                 fs: require('fs')
-            }
+            };
         }
     };
 
