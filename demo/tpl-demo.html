@@ -16,7 +16,6 @@
                 };
                 document.write('<textarea>方式1：' + Tpl(hehe) + '</textarea>');
 
-
                 var t = new Template;
                 var fn = t.template('<% for(var i = 0,len = data.length; i < len; i++){ %><a href="<%=data[i]%>"><%=data[i]%></a><%}%>');
                 document.write('<textarea>方式2：' + fn(hehe) + '</textarea>');
