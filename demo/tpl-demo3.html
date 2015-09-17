@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>加载库</title>
+        <script src="../lib/require-min.js"></script>
+    </head>
+    <body>
+        <script>
+            require(['../index.js'], function(Template){
+                var hehe = {
+                    data : [
+                        '11111111',
+                        '22222222'
+                    ]
+                };
+
+                var t = new Template;
+                var fn = t.template('<% for(var i = 0,len = data.length; i < len; i++){ %><a href="<%=data[i]%>"><%=data[i]%></a><%}%>');
+                document.write('<textarea>方式2：' + fn(hehe) + '</textarea>');
+            });
+        </script>
+    </body>
+</html>

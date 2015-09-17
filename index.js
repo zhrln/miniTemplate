@@ -1,8 +1,14 @@
 /* global define */
-;(function(){
+;(function(global, f){
+    if (typeof module === "object" && module && typeof module.exports === "object"){
+        module.exports = f();
+    } else if(typeof define === "function"){
+        define(function(){return f()});
+    }else{
+        global['tmpl'] = f();
+    }
+})(this, function(){
     'use strict';
-    /* 用于在 strict 状态下取全局对象*/
-    var _global = this || (Function('return this;')());
 
     var miniTemplate = function(){
         if(typeof window == 'undefined'){
@@ -53,20 +59,18 @@
 
     fn.wrapModule = function(fn){
         return '(' + Function([
-            'var fn = ' + fn + ';',
-            'if (typeof module === "object" && module && typeof module.exports === "object"){',
+                'var fn = ' + fn + ';',
+                'if (typeof module === "object" && module && typeof module.exports === "object"){',
                 'module.exports = fn;',
-            '} else if(typeof define === "function"){',
+                '} else if(typeof define === "function"){',
                 'define(function(){return fn;});',
-            '}'
-        ].join('')) + ')()';
+                '}else{',
+                'var scripts=document.getElementsByTagName("script");',
+                'var tplid=scripts[scripts.length-1].dataset["id"];',
+                'window[tplid]=fn;',
+                '}'
+            ].join('')) + ')()';
     };
 
-    if (typeof module === "object" && module && typeof module.exports === "object"){
-        module.exports = miniTemplate;
-    } else if(typeof define === "function"){
-        define(function(){return miniTemplate;});
-    }else{
-        _global.tmpl = miniTemplate;
-    }
-})();
+    return miniTemplate;
+});

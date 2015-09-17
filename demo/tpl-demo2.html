@@ -2,12 +2,12 @@
 <html>
     <head lang="en">
         <meta charset="UTF-8">
-        <title></title>
+        <title>加载预编译模板</title>
         <script src="../lib/require-min.js"></script>
     </head>
     <body>
         <script>
-            require(['./tpl.js','../index.js'], function(Tpl, Template){
+            require(['./tpl.js'], function(Tpl){
                 var hehe = {
                     data : [
                         '11111111',
@@ -15,10 +15,6 @@
                     ]
                 };
                 document.write('<textarea>方式1：' + Tpl(hehe) + '</textarea>');
-
-                var t = new Template;
-                var fn = t.template('<% for(var i = 0,len = data.length; i < len; i++){ %><a href="<%=data[i]%>"><%=data[i]%></a><%}%>');
-                document.write('<textarea>方式2：' + fn(hehe) + '</textarea>');
             });
         </script>
     </body>

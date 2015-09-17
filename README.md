@@ -1,9 +1,13 @@
 # miniTemplate
 一个简易的模板引擎
 
-# 使用方法
+有3种加载方式
 
-## NodeJS
+* 通过 require 加载 lib 进行实时编译渲染
+* 通过 require 加载预编译文件进行渲染
+* 直接加载预编译文件进行渲染
+
+## 准备阶段
 
 ### 模板文件(tpl.html)
 ```
@@ -20,21 +24,25 @@ var mt = new MiniTemplate;
 mt.precompile('./tpl.html','./tpl.js');
 ```
 
-### 载入预编译后的模板：
+## 使用方法
 
-``` javascript
-var fn = require('./tpl.js');
-fn({
-    data : [
-        '11111111',
-        '22222222'
-    ]
+### 方法一,通过 require 加载 lib 进行实时编译渲染:
+
+```
+require(['../index.js'], function(Template){
+    var hehe = {
+        data : [
+            '11111111',
+            '22222222'
+        ]
+    };
+    var t = new Template;
+    var fn = t.template('<% for(var i = 0,len = data.length; i < len; i++){ %><a href="<%=data[i]%>"><%=data[i]%></a><%}%>');
+    document.write(fn(hehe));
 });
 ```
 
-## Web
-
-### 载入预编译后的模板进行渲染
+### 方法二,通过 require 加载预编译文件进行渲染:
 
 ```
 require(['./tpl.js'], function(Tpl){
@@ -48,18 +56,16 @@ require(['./tpl.js'], function(Tpl){
 });
 ```
 
-### 实时渲染
-
+### 方法三,直接加载预编译文件进行渲染
 ```
-require(['../index.js'], function(Template){
+<script src="./tpl.js" data-id="tpl-demo"></script>
+<script>
     var hehe = {
         data : [
             '11111111',
             '22222222'
         ]
     };
-    var t = new Template;
-    var fn = t.template('<% for(var i = 0,len = data.length; i < len; i++){ %><a href="<%=data[i]%>"><%=data[i]%></a><%}%>');
-    document.write('fn(hehe));
-});
+    document.write('<textarea>方式3：' + window['tpl-demo'](hehe) + '</textarea>');
+</script>
 ```

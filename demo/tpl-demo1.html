@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+        <script src="./tpl.js" data-id="tpl-demo"></script>
+    </head>
+    <body>
+        <script>
+            var hehe = {
+                data : [
+                    '11111111',
+                    '22222222'
+                ]
+            };
+            document.write('<textarea>方式3：' + window['tpl-demo'](hehe) + '</textarea>');
+        </script>
+    </body>
+</html>
